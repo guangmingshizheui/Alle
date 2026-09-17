@@ -175,12 +175,33 @@ export default function MailboxPane() {
 											}}
 											className={`group cursor-pointer rounded-xl p-4 transition-all duration-200 outline-none md:p-5 ${isSelected ? "bg-card shadow-sm" : "hover:bg-secondary"}`}
 										>
-											<div className="mb-1.5 flex items-center justify-between gap-3">
-												<span className={`truncate text-sm tracking-wide ${listEmail.read === 0 ? "font-bold text-foreground" : "font-medium text-secondary-foreground"}`}>
-													{listEmail.from_name || "未知发件人"}
-												</span>
-												<div className="flex shrink-0 items-center gap-1.5">
-													{listEmail.read === 0 && <Circle size={8} className="fill-current text-chart-1" />}
+
+									<div className="mb-1.5 flex items-center justify-between gap-3">
+	
+									<span className={`truncate text-sm tracking-wide ${listEmail.read === 0 ? "font-bold text-foreground" : "font-medium text-secondary-foreground"}`}>
+		
+										{listEmail.from_name || "未知发件人"}
+	
+									</span>
+
+	
+										{/* 📌 新增这一段：智能格式化并显示发送/接收时间 */}
+	
+										<span className="text-[11px] text-muted-foreground ml-auto whitespace-nowrap">
+	
+											{sentAt.toLocaleString('zh-CN', {
+		
+		month: '2-digit',
+		day: '2-digit',
+			hour: '2-digit',
+			minute: '2-digit',
+			hour12: false
+		})}
+	</span>
+
+	<div className="flex shrink-0 items-center gap-1.5">
+		{listEmail.read === 0 && <Circle size={8} className="fill-current text-chart" />}
+		
 													<span className={`text-xs ${isSelected ? "text-muted-foreground" : "text-muted-foreground/70"}`}>
 														{sentAt.toLocaleString(
 															undefined,
