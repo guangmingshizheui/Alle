@@ -332,12 +332,13 @@ export default function MailboxPane() {
 			</div>
 		)}
 	</div>
-
-	{/* 🎨 修复正文卡片：在 className 中新增了 `pl-4 pr-4 pt-3 pb-3`，彻底把正文文字从紧贴边缘往里推，完美解决圆角遮字问题！ */}
-	<section className="min-h-0 flex-1 overflow-y-auto rounded-2xl border border-border/80 bg-card/60 pl-4 pr-4 pt-3 pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+{/* 🚀 终极修复方案：section 恢复默认，内部套一层带 pl-4 pr-4 的隔离盒子 */}
+<section className="min-h-0 flex-1 overflow-y-auto rounded-2xl border border-border/80 bg-card/60 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+	<div className="w-full h-full pl-4 pr-4 pt-3 pb-3 text-initial">
 		<MailShadowHtml key={email.id} id={email.id} body={email.body} attachments={email.attachments} />
-	</section>
-	<MailAttachmentList emailId={email.id} attachments={email.attachments} className="mt-5 shrink-0 border-t border-border/70 pt-5" />
+	</div>
+</section>
+<MailAttachmentList emailId={email.id} attachments={email.attachments} className="mt-5 shrink-0 border-t border-border/70 pt-5" />
 </div>
 </article>
 			)}
