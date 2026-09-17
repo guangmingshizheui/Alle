@@ -306,8 +306,7 @@ export default function MailboxPane() {
 	<h1 className="mx-2 mb-1 text-xl font-black tracking-tight text-foreground">
 		{email.subject || "(无主题)"}
 	</h1>
-
-	{/* 🚀 新增：标题下方的高级时间与收件白名单展示面板 */}
+{/* ⏱️ 标题下方的高级时间与收件白名单展示面板 */}
 	<div className="mx-2 mb-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
 		<div className="flex items-center gap-1">
 			<span className="font-semibold text-[11px] text-muted-foreground/80">投递时间:</span>
@@ -332,13 +331,11 @@ export default function MailboxPane() {
 			</div>
 		)}
 	</div>
-{/* 🚀 终极修复方案：section 恢复默认，内部套一层带 pl-4 pr-4 的隔离盒子 */}
-<section className="min-h-0 flex-1 overflow-y-auto rounded-2xl border border-border/80 bg-card/60 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-	<div className="w-full h-full pl-4 pr-4 pt-3 pb-3 text-initial">
+{/* ⏪ 100% 恢复作者最初的原厂正文卡片类名与结构（不带任何平移或内边距，字体大小回归完美默认） */}
+	<section className="min-h-0 flex-1 overflow-y-auto rounded-2xl border border-border/80 bg-card/60 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
 		<MailShadowHtml key={email.id} id={email.id} body={email.body} attachments={email.attachments} />
-	</div>
-</section>
-<MailAttachmentList emailId={email.id} attachments={email.attachments} className="mt-5 shrink-0 border-t border-border/70 pt-5" />
+	</section>
+	<MailAttachmentList emailId={email.id} attachments={email.attachments} className="mt-5 shrink-0 border-t border-border/70 pt-5" />
 </div>
 </article>
 			)}
