@@ -302,15 +302,44 @@ export default function MailboxPane() {
 						</div>
 					</header>
 					<div className="mx-2 mb-2 flex min-h-0 flex-1 flex-col">
-						<h1 className="mx-2 mb-2 text-xl font-black tracking-tight text-foreground">
-							{email.subject || "(无主题)"}
-						</h1>
-						<section className="min-h-0 flex-1 overflow-y-auto rounded-2xl border border-border/80 bg-card/60 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-							<MailShadowHtml key={email.id} id={email.id} body={email.body} attachments={email.attachments} />
-						</section>
-						<MailAttachmentList emailId={email.id} attachments={email.attachments} className="mt-5 shrink-0 border-t border-border/70 pt-5" />
-					</div>
-				</article>
+	{/* ✉️ 邮件标题 */}
+	<h1 className="mx-2 mb-1 text-xl font-black tracking-tight text-foreground">
+		{email.subject || "(无主题)"}
+	</h1>
+
+	{/* 🚀 新增：标题下方的高级时间与收件白名单展示面板 */}
+	<div className="mx-2 mb-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
+		<div className="flex items-center gap-1">
+			<span className="font-semibold text-[11px] text-muted-foreground/80">投递时间:</span>
+			<span className="font-medium">
+				{new Date(email.sent_at * 1000).toLocaleString('zh-CN', {
+					year: 'numeric',
+					month: '2-digit',
+					day: '2-digit',
+					hour: '2-digit',
+					minute: '2-digit',
+					second: '2-digit',
+					hour12: false
+				})}
+			</span>
+		</div>
+		{email.delivered_to && (
+			<div className="flex items-center gap-1">
+				<span className="font-semibold text-[11px] text-muted-foreground/80">至:</span>
+				<span className="rounded bg-secondary/80 px-1.5 py-0.5 font-mono text-[11px] font-medium text-foreground">
+					{email.delivered_to}
+				</span>
+			</div>
+		)}
+	</div>
+
+	{/* 🎨 修复正文卡片：在 className 中新增了 `pl-4 pr-4 pt-3 pb-3`，彻底把正文文字从紧贴边缘往里推，完美解决圆角遮字问题！ */}
+	<section className="min-h-0 flex-1 overflow-y-auto rounded-2xl border border-border/80 bg-card/60 pl-4 pr-4 pt-3 pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+		<MailShadowHtml key={email.id} id={email.id} body={email.body} attachments={email.attachments} />
+	</section>
+	<MailAttachmentList emailId={email.id} attachments={email.attachments} className="mt-5 shrink-0 border-t border-border/70 pt-5" />
+</div>
+</article>
 			)}
 		</main>
 	);
