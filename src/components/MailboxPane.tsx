@@ -175,43 +175,22 @@ export default function MailboxPane() {
 											}}
 											className={`group cursor-pointer rounded-xl p-4 transition-all duration-200 outline-none md:p-5 ${isSelected ? "bg-card shadow-sm" : "hover:bg-secondary"}`}
 										>
-
-									<div className="mb-1.5 flex items-center justify-between gap-3">
-	
-									<span className={`truncate text-sm tracking-wide ${listEmail.read === 0 ? "font-bold text-foreground" : "font-medium text-secondary-foreground"}`}>
-		
-										{listEmail.from_name || "未知发件人"}
-	
-									</span>
-
-	
-										{/* 📌 新增这一段：智能格式化并显示发送/接收时间 */}
-	
-										<span className="text-[11px] text-muted-foreground ml-auto whitespace-nowrap">
-	
-											{sentAt.toLocaleString('zh-CN', {
-		
-		month: '2-digit',
-		day: '2-digit',
-			hour: '2-digit',
-			minute: '2-digit',
-			hour12: false
-		})}
+<div className="mb-1.5 flex items-center justify-between gap-3">
+	<span className={`truncate text-sm tracking-wide ${listEmail.read === 0 ? "font-bold text-foreground" : "font-medium text-secondary-foreground"}`}>
+		{listEmail.from_name || "未知发件人"}
 	</span>
-
 	<div className="flex shrink-0 items-center gap-1.5">
 		{listEmail.read === 0 && <Circle size={8} className="fill-current text-chart" />}
-		
-													<span className={`text-xs ${isSelected ? "text-muted-foreground" : "text-muted-foreground/70"}`}>
-														{sentAt.toLocaleString(
-															undefined,
-															sentAt.toDateString() === now.toDateString()
-																? { hour: "2-digit", minute: "2-digit" }
-																: sentAt.getFullYear() === now.getFullYear()
-																	? { month: "numeric", day: "numeric" }
-																	: { year: "numeric", month: "numeric", day: "numeric" },
-														)}
-													</span>
+<span className="text-xs text-muted-foreground ml-auto whitespace-nowrap">
+  {sentAt.toLocaleString('zh-CN', {
+    year: '2-digit',    // 显示 2 位年份，如 "26"
+    month: '2-digit',   // 显示 2 位月份，如 "09"
+    day: '2-digit',     // 显示 2 位日期，如 "18"
+    hour: '2-digit',    // 显示 2 位小时
+    minute: '2-digit',  // 显示 2 位分钟
+    hour12: false       // 使用 24 小时制
+  })}
+</span>
 												</div>
 											</div>
 											<h3 className={`pr-2 text-sm leading-snug md:pr-4 ${listEmail.read === 0 ? "font-bold text-foreground" : "font-medium text-foreground"}`}>
