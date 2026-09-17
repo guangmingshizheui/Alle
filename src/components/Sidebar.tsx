@@ -46,8 +46,7 @@ function SortableAccountButton({
 				type="button"
 				onClick={() => onSelectAccount(account.id)}
 				className={`peer flex h-12 w-12 shrink-0 items-center justify-center rounded-full transition-all duration-300 ease-out outline-none touch-none select-none hover:scale-110 hover:rotate-6 active:scale-95 ${isDragging ? "scale-110 shadow-[0_12px_32px_rgba(15,23,42,0.28)]" : ""} ${isDropTarget && !isDragging ? "scale-105" : ""} ${isActive ? "bg-gradient-to-tr from-indigo-500 to-violet-500 text-white shadow-md shadow-indigo-200 ring-2 ring-indigo-400" : "bg-gradient-to-tr from-slate-100 to-slate-200 text-slate-600 hover:from-indigo-500 hover:to-violet-500 hover:text-white"}`}
-
-			>
+		>
 				<span className={`text-lg leading-none tracking-tighter ${isActive ? "font-bold" : "font-semibold"}`}>
 					{Array.from(new Intl.Segmenter(undefined, { granularity: "grapheme" }).segment(label))[0]?.segment?.toUpperCase()}
 				</span>
